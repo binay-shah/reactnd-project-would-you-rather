@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Home from './Home'
 import { setAuthedUser } from '../actions/authedUser'
-import { Card, Button, Form } from 'react-bootstrap'
+import { Card, Button, Form, Row } from 'react-bootstrap'
 
 class Login extends React.Component{
 
@@ -35,36 +35,32 @@ class Login extends React.Component{
 			return <Home />
 		}	
 		return(
-			<div>
-				<form onSubmit={this.handleSubmit}>
-					
-					<Card className="text-center">
-						  <Card.Header><strong>Welcome to the would yoy Rather App!</strong><h6>Please Sign in to continue</h6></Card.Header>
-						  <Card.Body>
-						    <Card.Title><img src="../logo192.png" alt="logo" /></Card.Title>
-						    <Card.Text>
-      							Sign In
-    						</Card.Text>
-						    <Form>
-							  <Form.Group>							    
-							    <Form.Control as="select"  onChange={this.handleChange}>
-							    
-									<option value="user">Select user</option>
-									{   userIds.map((id) => (
-										<option key={id} value={id}>{users[id].name}</option>	
-									))}						
-								</Form.Control>
-							  </Form.Group>
-							  <Button variant="primary" 
-							  	disabled={selectedUser === 'user'} type="submit" size="lg" block>
-    							Sign In
-  							  </Button>
-							</Form>	
-						  </Card.Body>						  
-						</Card>
-					
-				</form>
-			</div>
+			<Row className="justify-content-md-center">				
+				<Card className='text-center'>
+				  <Card.Header><strong>Welcome to the would you Rather App!</strong><h6>Please Sign in to continue</h6></Card.Header>
+				  <Card.Body>
+				    <Card.Title><img src="../logo192.png" alt="logo" /></Card.Title>
+				    <Card.Text>
+							Sign In
+					</Card.Text>
+				    <Form onSubmit={this.handleSubmit}>
+					  <Form.Group>							    
+					    <Form.Control as="select"  onChange={this.handleChange}>
+					    
+							<option value="user">Select user</option>
+							{   userIds.map((id) => (
+								<option key={id} value={id}>{users[id].name}</option>	
+							))}						
+						</Form.Control>
+					  </Form.Group>
+					  <Button variant="primary" 
+					  	disabled={selectedUser === 'user'} type="submit" size="lg" block>
+						Sign In
+						  </Button>
+					</Form>	
+				  </Card.Body>						  
+				</Card>					
+			</Row>
 		)
 	}
 }

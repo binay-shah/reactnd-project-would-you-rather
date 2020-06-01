@@ -15,3 +15,35 @@ a {
   margin: 0 auto;
   padding: 10px;
 }
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.vl {
+  border-right: 1px solid #D3D3D3;
+}
+
+.avatar {
+  height: 100px;
+  border-radius: 50px;
+  margin: 10px;
+  
+}
+
+.center {
+  text-align: center;
+}
+
+.top-buffer { margin-top:20px; }
+
+.user-answer{
+  background: #00e6a8;
+}
+
