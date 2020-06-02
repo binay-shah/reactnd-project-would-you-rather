@@ -1,5 +1,7 @@
 import { getUsers } from '../utils/api'
 export const RECEIVE_USERS = 'RECEIVE_USERS'
+export const ADD_ANSWER_TO_USER = 'ADD_ANSWER_TO_USER'
+export const ADD_QUESTION_TO_USER = 'ADD_QUESTION_TO_USER'
 
 
 export function receiveUsers(users){
@@ -16,5 +18,23 @@ export function handleGetUsers(){
 			.then((users) => (
 				dispatch(receiveUsers(users))	
 			))
+	}
+}
+
+
+export function addAnswerToUser({authedUser, qid, answer}){
+	return {
+		type: ADD_ANSWER_TO_USER,
+		authedUser,
+		qid,
+		answer
+	}
+}
+
+export function addQuestionToUser({author, id}){
+	return {
+		type: ADD_QUESTION_TO_USER,
+		author,
+		id,		
 	}
 }

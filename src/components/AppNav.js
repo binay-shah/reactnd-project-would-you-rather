@@ -1,7 +1,8 @@
 import React from 'react'
-import { Navbar, Container,  Nav, Form, FormControl, Button }  from 'react-bootstrap'
+import { Navbar,  Nav,  }  from 'react-bootstrap'
 import { connect } from 'react-redux'
 import {setAuthedUser} from '../actions/authedUser'
+import { NavLink }  from 'react-router-dom'
 
 class AppNav extends React.Component{
 
@@ -15,17 +16,26 @@ class AppNav extends React.Component{
 		return(
 			
 			<Navbar>
-			  <Navbar.Brand href="#home">Navbar with text</Navbar.Brand>
+			  <Navbar.Brand href="#home"></Navbar.Brand>
 			  <Navbar.Toggle />
 			  <Nav className="mr-auto">
-			      <Nav.Link href="#home">Home</Nav.Link>
-			      <Nav.Link href="#link">New Question</Nav.Link>
-			      <Nav.Link href="#link">Leader Board</Nav.Link>
+			      
+			      	<NavLink to='/' className='nav' activeClassName='active'>Home</NavLink>
+			      
+			      
+			      	<NavLink to='/add'  className='nav' activeClassName='active'>New Question</NavLink>
+			      
+			      
+			      	<NavLink to='/leaderboard' className='nav' activeClassName='active'>Leader Board</NavLink>
+			      
 			   </Nav>   
 			  <Navbar.Collapse className="justify-content-end">
-			    <Navbar.Text>
-			      <a href="#login">Hello, {this.props.authedUser}</a>
-			    </Navbar.Text>
+			    <Nav.Item className='nav'>
+			      <Navbar.Text>Hello, {this.props.user.name}</Navbar.Text>			      
+			    </Nav.Item >
+			    <Nav.Item>
+			    	<img className='avatar-small mx-auto d-block' src={this.props.user.avatarURL} alt="avatar" />
+			    </Nav.Item>
 			    <Nav.Link onClick={this.handleLogout}>
 			       Logout
 			    </Nav.Link>
@@ -36,6 +46,11 @@ class AppNav extends React.Component{
 	}
 }
 
-export default connect((state) => ({
-	authedUser: state.authedUser
-}))(AppNav)
+function mapStateToProps({users, authedUser}){
+	return {
+		user: users[authedUser]
+	}
+	
+}
+
+export default connect(mapStateToProps)(AppNav)

@@ -37,6 +37,13 @@ li {
   
 }
 
+.avatar-small {
+  height: 50px;
+  border-radius: 25px;
+  margin: 10px;
+  
+}
+
 .center {
   text-align: center;
 }
@@ -47,3 +54,23 @@ li {
   background: #00e6a8;
 }
 
+span { 
+            display: flex; 
+            flex-direction: row; 
+        } 
+
+
+span:before, span:after {
+     content: "";
+     flex: 1 1;
+     border-bottom: 1px solid #D3D3D3;
+     margin: auto;
+}
+
+.score{
+  background: #4BB543;
+  color: #fff;
+}
+.nav {
+  margin-right: 10px;
+}

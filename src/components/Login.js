@@ -31,7 +31,7 @@ class Login extends React.Component{
 		const { userIds, users } = this.props
 		const { selectedUser, toHome } = this.state	
 
-		if(toHome == true){
+		if(toHome === true){
 			return <Home />
 		}	
 		return(

@@ -1,24 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Button, Col, Row, ProgressBar } from 'react-bootstrap'
-import { formatQuestion, formatDate } from '../utils/helpers'
+import { Card, Col, Row, ProgressBar } from 'react-bootstrap'
+import { formatQuestion } from '../utils/helpers'
 
 class AnsweredPoll extends Component{
 
 	render(){
 		const { question, authedUser } = this.props
-		const { name, avatar, optionOne, optionTwo} = question
-		const totalVotes = optionOne.votes.length + optionOne.votes.length
+		const { name, optionOne, optionTwo} = question
+		const totalVotes = optionOne.votes.length + optionTwo.votes.length
 		const optionOneVoteCount = optionOne.votes.length
 		const optionTwoVoteCount = optionTwo.votes.length
 		const optionOnePercent = optionOneVoteCount/totalVotes *100;
 		const optionTwoPercent = optionTwoVoteCount/totalVotes *100;
-
-		
-
 		
 		return(
-			<div>
+			
 				<Card>	
 				  <Card.Header>{name} asks: </Card.Header>			  
 				  <Card.Body>	
@@ -62,22 +59,18 @@ class AnsweredPoll extends Component{
 				    </Row>			    
 				  </Card.Body>
 				</Card>
-			</div>
+			
 		)
 	}
 }
 
 function mapStateToProps({authedUser, users, questions}, {id}){
 
-	
-
 	const question = questions[id] 	
-
 	return {
 		authedUser,
 		question: question ? formatQuestion(question, users[question.author], authedUser): null	  
 	}
-
 }
 
 export default connect(mapStateToProps)(AnsweredPoll)

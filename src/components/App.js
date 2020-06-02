@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Login from './Login'
 import Home from './Home'
-import { Navbar, Container,  Nav, Form, FormControl, Button }  from 'react-bootstrap'
+import { Container }  from 'react-bootstrap'
 import QuestionPage from './QuestionPage'
+import NewQuestion from './NewQuestion'
+import Leaderboard from './Leaderboard'
 
 
 class  App extends React.Component {
@@ -20,7 +22,9 @@ class  App extends React.Component {
 	  		<Router>
 			    <Container>
 				    <Route  path='/' exact  component={authedUser === null ? Login : Home} />
-				    <Route 	path='/question/:id' component={QuestionPage} />			    	
+				    <Route 	path='/question/:id' component={QuestionPage} />
+				    <Route 	path='/add' component={NewQuestion} />
+				    <Route 	path='/leaderboard' component={Leaderboard} />			    	
 			    </Container>
 		    </Router>		    
 	  	)

@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Button, Col, Row } from 'react-bootstrap'
-import { formatQuestion, formatDate } from '../utils/helpers'
+import { formatQuestion } from '../utils/helpers'
 import { Link } from 'react-router-dom'
 
 class Question extends Component{
 
 	render(){
 		const { question } = this.props
-		const { id, name, avatar, optionOne, optionTwo} = question
+		const { id} = question
 		return(
 			
 				<Card>
 				  <Card.Header>{question.name} asks: </Card.Header>
-				  <Card.Body>
-				    <Card.Title>Would you rather</Card.Title>
+				  <Card.Body>				    
 				    <Row>
-				    	<Col className='vl' xs={4}>
-				    		<img className='avatar' src={question.avatar} alt="avatar" />
+				    	<Col className='vl' md={4}>
+				    		<img className='avatar mx-auto d-block' src={question.avatar} alt="avatar" />
 				    	</Col>
-				    	<Col xs={8}>
+				    	<Col md={8}>
+				    		<Card.Title>Would you Rather</Card.Title>
 				    		<Card.Text>
 				      			...{question.optionOne.text}...
 				    		</Card.Text>

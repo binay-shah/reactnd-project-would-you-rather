@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
 import AppNav from './AppNav'
-import { ToggleButtonGroup, ToggleButton, Row } from 'react-bootstrap'
+import { ToggleButtonGroup, ToggleButton, Row, Card } from 'react-bootstrap'
 
 class Home extends React.Component{
 
@@ -12,8 +12,6 @@ class Home extends React.Component{
 	}
 
 	handleChange = (val) => {
-		console.log(val)
-
 		this.setState(() => ({
 			buttonValue: val,
 			showQuestions: val === '1' ? this.props.answeredQuestions : this.props.unAnsweredQuestions
@@ -21,29 +19,33 @@ class Home extends React.Component{
 	}
 
 	render(){
-		const { users, authedUser, answeredQuestions } = this.props
+		
 		const { showQuestions } = this.state		
 		
 		return(
 			<div>
 				<AppNav />
 				<Row className="justify-content-md-center">
-					<ToggleButtonGroup type="radio" name="options" defaultValue={this.state.buttonValue} onChange={this.handleChange}>
-					    <ToggleButton value="1">Answered Questions</ToggleButton>
-					    <ToggleButton value="2">UnAnswered Questions</ToggleButton>					    
-  					</ToggleButtonGroup>
-				</Row>
-				<Row className="justify-content-md-center">
-					<ul>
-			            {showQuestions.map((id) => (
-			              <li key={id}>
-			                <div>
-			                  <Question id={id} />
-			                </div>
-			              </li>
-			            ))}
-          			</ul>
-				</Row>
+					<Card style={{ width: '30rem'}}>
+						<Card.Header className="text-center" variant="top">
+							<ToggleButtonGroup type="radio" name="options" defaultValue={this.state.buttonValue} onChange={this.handleChange}>
+							    <ToggleButton value="1">Answered Questions</ToggleButton>
+							    <ToggleButton value="2">UnAnswered Questions</ToggleButton>					    
+		  					</ToggleButtonGroup>
+						</Card.Header>
+						<Card.Body>
+							<ul>
+					            {showQuestions.map((id) => (
+					              <li key={id}>
+					                <div>
+					                  <Question id={id} />
+					                </div>
+					              </li>
+					            ))}
+		          			</ul>
+						</Card.Body>
+					</Card>
+				</ Row>
 			</div>		
 		)
 	}

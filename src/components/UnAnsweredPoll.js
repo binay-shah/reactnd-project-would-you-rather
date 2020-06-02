@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Button, Col, Row, Form } from 'react-bootstrap'
-import { formatQuestion, formatDate } from '../utils/helpers'
+import { formatQuestion } from '../utils/helpers'
+import { handleSubmitQuestionAnswer } from '../actions/shared'
 
 class UnAnsweredPoll extends Component{
 
@@ -15,13 +16,27 @@ class UnAnsweredPoll extends Component{
   		});
 	}
 
+
+
+	handleSubmit = (e) => {
+		e.preventDefault()
+		const {qid, authedUser, dispatch} = this.props
+		const answer = this.state.selectedOption
+		const info = {authedUser, qid,  answer}
+		console.log('info', info)
+		dispatch(handleSubmitQuestionAnswer(info))
+		
+		//dispatch(saveQuestionAnswer({authedUser, qid, this.state.selectedOption}))
+
+	}
+
 	render(){
 		const { question } = this.props
 		console.log('question', question)
 		const { name, avatar, optionOne, optionTwo} = question
 		return(
-			<div>
-				<Card>
+			
+				<Card style={{ width: '30rem'}}>
 				  <Card.Header>{name} asks: </Card.Header>
 				  <Card.Body>	
 				  			    
@@ -33,7 +48,7 @@ class UnAnsweredPoll extends Component{
 				    		<Card.Text>
 				      			Would You Rather..
 				    		</Card.Text>
-				    		<Form> 
+				    		<Form onSubmit={this.handleSubmit}> 
 				    			<Form.Check 
 					    			value='optionOne'
 					    			type="radio"
@@ -48,26 +63,32 @@ class UnAnsweredPoll extends Component{
 					    			label={optionTwo.text}
 					    			onChange={this.handleOptionChange} 
 				    			/>
+				    			<Button 
+					    			disabled={this.state.selectedOption===''} 
+					    			variant="primary" block
+					    			type="submit"
+				    			>
+				    				Submit
+				    			</Button>
 				    		</Form>	
-				    		<Button disabled={this.state.selectedOption==''} variant="primary" block>Submit</Button>
+				    		
 				    	</Col>				    
 				    </Row>				    
 				  </Card.Body>
 				</Card>
-			</div>
+			
 		)
 	}
 }
 
 function mapStateToProps({authedUser, users, questions}, {id}){
 
-	
-
-	const question = questions[id]  	
+	const question = questions[id]	
 
 	return {
 		authedUser,
-		question: formatQuestion(question, users[question.author], authedUser)	  
+		question: formatQuestion(question, users[question.author], authedUser),	
+		qid: id
 	}
 
 }
